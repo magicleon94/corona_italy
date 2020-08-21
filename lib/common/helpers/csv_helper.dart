@@ -10,11 +10,8 @@ class CsvHelper {
       final fields = row.split(',');
       for (var i = 0; i < fields.length; i++) {
         final header = headers[i];
-        var value = fields[i];
-        if (value == '') {
-          value = null;
-        }
-        if (value != null) {
+        final value = fields[i];
+        if (value != '') {
           map[header] = int.tryParse(value) ??
               double.tryParse(value) ??
               num.tryParse(value) ??
