@@ -1,19 +1,25 @@
-import 'package:corona_italy/features/infection_report/model/national/national_report_vm.dart';
+import 'package:corona_italy/features/infection_report/model/regional/regional_report_vm.dart';
 import 'package:corona_italy/features/infection_report/presentation/widgets/report_grid_tile.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class NationalReportScreen extends StatelessWidget {
-  final NationalReportVm model;
+class RegionalReportScreen extends StatefulWidget {
+  final RegionalReportVm model;
 
-  const NationalReportScreen({Key key, @required this.model})
+  const RegionalReportScreen({Key key, @required this.model})
       : assert(model != null),
         super(key: key);
+
+  @override
+  _RegionalReportScreenState createState() => _RegionalReportScreenState();
+}
+
+class _RegionalReportScreenState extends State<RegionalReportScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(tr('national_report')),
+        title: Text(widget.model.regionName),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -25,59 +31,59 @@ class NationalReportScreen extends StatelessWidget {
               children: [
                 ReportGridTile(
                   tr('hospitalized_with_symptoms'),
-                  model.hospitalizedWithSymptoms,
+                  widget.model.hospitalizedWithSymptoms,
                 ),
                 ReportGridTile(
                   tr('intensive_care'),
-                  model.intensiveCare,
+                  widget.model.intensiveCare,
                 ),
                 ReportGridTile(
                   tr('total_hospitalized'),
-                  model.totalHospitalized,
+                  widget.model.totalHospitalized,
                 ),
                 ReportGridTile(
                   tr('home_isolation'),
-                  model.homeIsolation,
+                  widget.model.homeIsolation,
                 ),
                 ReportGridTile(
                   tr('total_positive'),
-                  model.totalPositive,
+                  widget.model.totalPositive,
                 ),
                 ReportGridTile(
                   tr('total_positive_variation'),
-                  model.totalPositiveVariation,
+                  widget.model.totalPositiveVariation,
                 ),
                 ReportGridTile(
                   tr('new_positive'),
-                  model.newPositive,
+                  widget.model.newPositive,
                 ),
                 ReportGridTile(
                   tr('discharged_healed'),
-                  model.dischargedHealed,
+                  widget.model.dischargedHealed,
                 ),
                 ReportGridTile(
                   tr('deceased'),
-                  model.deceased,
+                  widget.model.deceased,
                 ),
                 ReportGridTile(
                   tr('diagnostic_suspicion_cases'),
-                  model.diagnosticSuspicionCases,
+                  widget.model.diagnosticSuspicionCases,
                 ),
                 ReportGridTile(
                   tr('screening_cases'),
-                  model.screeningCases,
+                  widget.model.screeningCases,
                 ),
                 ReportGridTile(
                   tr('total_cases'),
-                  model.totalCases,
+                  widget.model.totalCases,
                 ),
                 ReportGridTile(
                   tr('tampons'),
-                  model.tampons,
+                  widget.model.tampons,
                 ),
                 ReportGridTile(
                   tr('tested_cases'),
-                  model.testedCases,
+                  widget.model.testedCases,
                 ),
               ],
             ),
@@ -91,12 +97,22 @@ class NationalReportScreen extends StatelessWidget {
                       tr(
                         'notes',
                       ),
+                      style: Theme.of(context).textTheme.headline5,
                     ),
-                    Text((model.notes?.isNotEmpty ?? false)
-                        ? model.notes
-                        : tr('no_notes')),
+                    Text(
+                      (widget.model.notes?.isNotEmpty ?? false)
+                          ? widget.model.notes
+                          : tr('no_notes'),
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
                   ],
                 ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Text(
+                tr('provinces_list') + ' coming soon',
+                style: Theme.of(context).textTheme.headline5,
               ),
             ),
             SliverToBoxAdapter(
@@ -105,7 +121,9 @@ class NationalReportScreen extends StatelessWidget {
                 child: Text(
                   tr(
                     'last_update',
-                    namedArgs: {'lastUpdate': DateFormat().format(model.date)},
+                    namedArgs: {
+                      'lastUpdate': DateFormat().format(widget.model.date)
+                    },
                   ),
                   textAlign: TextAlign.end,
                 ),

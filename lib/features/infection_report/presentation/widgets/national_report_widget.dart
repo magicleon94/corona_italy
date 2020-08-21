@@ -66,8 +66,8 @@ class _NationalReportCard extends StatelessWidget {
               alignment: WrapAlignment.spaceAround,
               children: [
                 _NationalReportChip(
-                  tr('total_cases'),
-                  model.totalCases.toString(),
+                  tr('total_positive'),
+                  model.totalPositive.toString(),
                 ),
                 _NationalReportChip(
                   tr('daily_variation'),
@@ -79,7 +79,8 @@ class _NationalReportCard extends StatelessWidget {
           Center(
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
-              onTap: () => Navigator.of(context).pushNamed(Routes.nationDetail),
+              onTap: () => Navigator.of(context)
+                  .pushNamed(Routes.nationDetail, arguments: model),
               child: Text(
                 tr('full_report'),
                 style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:corona_italy/app/routes/handlers/home_route_handler.dart';
 import 'package:corona_italy/app/routes/handlers/national_report_handler.dart';
+import 'package:corona_italy/app/routes/handlers/regional_report_handler.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -17,7 +18,11 @@ class Routes {
 
     switch (route) {
       case nationDetail:
-        return NationalReportHandler(settings).getRoute(context);
+        return NationalReportHandler(settings, settings.arguments)
+            .getRoute(context);
+      case regionDetail:
+        return RegionalReportHandler(settings, settings.arguments)
+            .getRoute(context);
       default:
         return HomeRouteHandler(settings).getRoute(context);
     }

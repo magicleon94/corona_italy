@@ -3,11 +3,11 @@ import 'package:corona_italy/features/infection_report/bloc/national/national_re
 import 'package:corona_italy/features/infection_report/bloc/national/national_report_bloc_state.dart';
 import 'package:corona_italy/features/infection_report/model/national/national_report_request.dart';
 import 'package:corona_italy/features/infection_report/model/national/national_report_vm.dart';
-import 'package:corona_italy/features/infection_report/service/national_report_service.dart';
+import 'package:corona_italy/features/infection_report/service/infections_report_service.dart';
 
 class NationalReportBloc
     extends ClosableBloc<NationalReportBlocEvent, NationalReportState> {
-  NationalReportService service;
+  InfectionsReportService service;
   NationalReportBloc(this.service, {NationalReportState initialState})
       : super(initialState ?? NationalReportIdle());
 

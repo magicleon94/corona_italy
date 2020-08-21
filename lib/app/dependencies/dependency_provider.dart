@@ -2,7 +2,9 @@ import 'package:corona_italy/app/config/app_config.dart';
 import 'package:corona_italy/common/closable_bloc.dart';
 import 'package:corona_italy/features/infection_report/bloc/national/national_report_bloc.dart';
 import 'package:corona_italy/features/infection_report/bloc/national/national_report_bloc_state.dart';
-import 'package:corona_italy/features/infection_report/service/national_report_service.dart';
+import 'package:corona_italy/features/infection_report/bloc/regional/regional_report_bloc.dart';
+import 'package:corona_italy/features/infection_report/bloc/regional/regional_report_bloc_state.dart';
+import 'package:corona_italy/features/infection_report/service/infections_report_service.dart';
 import 'package:dio/dio.dart';
 import 'package:http_services/http_services.dart';
 
@@ -25,23 +27,33 @@ class DependencyProvider {
     return _dio;
   }
 
-  NationalReportService _nationalReportService;
+  InfectionsReportService _infectionsReportService;
 
-  NationalReportService get nationalReportService {
-    if (_serviceNeedsBuild(_nationalReportService)) {
-      _nationalReportService ??= NationalReportService(dio);
+  InfectionsReportService get infectionsReportService {
+    if (_serviceNeedsBuild(_infectionsReportService)) {
+      _infectionsReportService ??= InfectionsReportService(dio);
     }
-    return _nationalReportService;
+    return _infectionsReportService;
   }
 
   NationalReportBloc _nationalReportBloc;
 
   NationalReportBloc getNationalReportBloc({NationalReportState initialState}) {
     if (_blocNeedsBuild(_nationalReportBloc)) {
-      _nationalReportBloc =
-          NationalReportBloc(nationalReportService, initialState: initialState);
+      _nationalReportBloc = NationalReportBloc(infectionsReportService,
+          initialState: initialState);
     }
     return _nationalReportBloc;
+  }
+
+  RegionalReportBloc _regionalReportBloc;
+
+  RegionalReportBloc getRegionalReportBloc({RegionalReportState initialState}) {
+    if (_blocNeedsBuild(_regionalReportBloc)) {
+      _regionalReportBloc = RegionalReportBloc(infectionsReportService,
+          initialState: initialState);
+    }
+    return _regionalReportBloc;
   }
 
   bool _blocNeedsBuild(ClosableBloc bloc) => bloc == null || bloc.closed;
