@@ -72,7 +72,7 @@ class _Body extends StatelessWidget {
                         ),
                     title: report.regionName,
                     totalPositive: report.totalPositive,
-                    totalPositiveVariation: report.totalPositiveVariation);
+                    newPositive: report.newPositive);
               },
               separatorBuilder: (_, __) => Divider(),
               itemCount: model.reports.length,

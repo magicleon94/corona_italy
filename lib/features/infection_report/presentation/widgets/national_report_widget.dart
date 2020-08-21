@@ -70,8 +70,8 @@ class _NationalReportCard extends StatelessWidget {
                   model.totalPositive.toString(),
                 ),
                 _NationalReportChip(
-                  tr('daily_variation'),
-                  model.totalPositiveVariation.toString(),
+                  tr('new_positive'),
+                  model.newPositive.toString(),
                 ),
               ],
             ),

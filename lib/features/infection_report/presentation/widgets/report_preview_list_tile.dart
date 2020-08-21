@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 class ReportPreviewListTile extends StatelessWidget {
   final String title;
   final int totalPositive;
-  final int totalPositiveVariation;
+  final int newPositive;
   final void Function() onTap;
 
   const ReportPreviewListTile({
     Key key,
     @required this.title,
     @required this.totalPositive,
-    @required this.totalPositiveVariation,
+    @required this.newPositive,
     this.onTap,
   })  : assert(title != null),
         assert(totalPositive != null),
-        assert(totalPositiveVariation != null),
+        assert(newPositive != null),
         super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ReportPreviewListTile extends StatelessWidget {
         alignment: WrapAlignment.spaceAround,
         children: [
           Text('${tr('total_positive')}: $totalPositive'),
-          Text('${tr('daily_variation')}: $totalPositiveVariation'),
+          Text('${tr('daily_variation')}: $newPositive'),
         ],
       ),
       trailing: Icon(
