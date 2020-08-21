@@ -31,7 +31,7 @@ class NationalReportBloc
   }
 
   Future<NationalReportVm> _fetchNationalReport() async {
-    final response = await service.getNationalResponse(NationalReportRequest());
+    final response = await service.getNationalReport(NationalReportRequest());
     return NationalReportVm.fromDto(response);
   }
 

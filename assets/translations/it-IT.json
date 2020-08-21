@@ -26,5 +26,6 @@
     "no_notes": "Nessuna nota",
     "regions_list": "Lista regioni",
     "full_report": "Report completo",
-    "provinces_list": "Lista province"
+    "provinces_list": "Lista province",
+    "no_provinces_data": "Nessun dato sulle province disponibile"
 }

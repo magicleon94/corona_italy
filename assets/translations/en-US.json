@@ -26,5 +26,6 @@
     "no_notes": "No notes",
     "regions_list": "Regions list",
     "full_report": "Full report",
-    "provinces_list": "Provinces list"
+    "provinces_list": "Provinces list",
+    "no_provinces_data": "No provinces data available"
 }

@@ -57,7 +57,7 @@ class RegionalReport {
   final int tampons;
   @JsonKey(name: 'casi_testati')
   final int testedCases;
-  @JsonKey(name: 'note')
+  @JsonKey(name: 'note', defaultValue: '')
   final String notes;
 
   RegionalReport({

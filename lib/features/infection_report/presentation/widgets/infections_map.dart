@@ -6,7 +6,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong/latlong.dart';
 
 class InfectionsMap extends StatefulWidget {
@@ -66,17 +65,17 @@ class _InfectionsMapState extends State<InfectionsMap> {
         }
         return FlutterMap(
           options: MapOptions(
-              controller: mapController,
-              center: center,
-              bounds: bounds,
-              zoom: 5,
-              minZoom: 5.5,
-              screenSize: MediaQuery.of(context).size,
-              slideOnBoundaries: true,
-              swPanBoundary: bounds.southWest,
-              nePanBoundary: bounds.northEast,
-              interactive: true,
-              plugins: [MarkerClusterPlugin()]),
+            controller: mapController,
+            center: center,
+            bounds: bounds,
+            zoom: 5,
+            minZoom: 5.5,
+            screenSize: MediaQuery.of(context).size,
+            slideOnBoundaries: true,
+            swPanBoundary: bounds.southWest,
+            nePanBoundary: bounds.northEast,
+            interactive: true,
+          ),
           layers: [
             TileLayerOptions(
               urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',

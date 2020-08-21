@@ -1,3 +1,4 @@
+import 'package:corona_italy/common/helpers/location_helper.dart';
 import 'package:corona_italy/features/infection_report/model/regional/regional_report_response.dart';
 import 'package:latlong/latlong.dart';
 
@@ -46,20 +47,12 @@ class RegionalReportVm {
     this.notes,
   });
 
-  static LatLng _getLatLng(double latitude, double longitude) {
-    if (latitude != null && longitude != null) {
-      return LatLng(latitude, longitude);
-    }
-
-    return null;
-  }
-
   factory RegionalReportVm.fromDto(RegionalReport dto) => RegionalReportVm(
         date: dto.date,
         country: dto.country,
         regionCode: dto.regionCode,
         regionName: dto.regionName,
-        location: _getLatLng(dto.latitude, dto.longitude),
+        location: LocationHelper.getLatLng(dto.latitude, dto.longitude),
         hospitalizedWithSymptoms: dto.hospitalizedWithSymptoms,
         intensiveCare: dto.intensiveCare,
         totalHospitalized: dto.totalHospitalized,

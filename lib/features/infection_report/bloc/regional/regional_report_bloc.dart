@@ -31,7 +31,7 @@ class RegionalReportBloc
   }
 
   Future<RegionalReportsVm> _fetchRegionalReport() async {
-    final response = await service.getRegionalResponse(RegionalReportRequest());
+    final response = await service.getRegionalReport(RegionalReportRequest());
     final model = RegionalReportsVm.fromDto(response);
     return model;
   }

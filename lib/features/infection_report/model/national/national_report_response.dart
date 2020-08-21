@@ -38,7 +38,7 @@ class NationalReportResponse extends ResponseBase {
   final int tampons;
   @JsonKey(name: 'casi_testati')
   final int testedCases;
-  @JsonKey(name: 'note')
+  @JsonKey(name: 'note', defaultValue: '')
   final String notes;
 
   NationalReportResponse({

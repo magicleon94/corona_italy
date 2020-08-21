@@ -1,7 +1,12 @@
+import 'package:corona_italy/app/dependencies/dependency_provider.dart';
+import 'package:corona_italy/features/infection_report/bloc/provincial/provincial_report_bloc.dart';
+import 'package:corona_italy/features/infection_report/bloc/provincial/provincial_report_bloc_event.dart';
 import 'package:corona_italy/features/infection_report/model/regional/regional_report_vm.dart';
+import 'package:corona_italy/features/infection_report/presentation/widgets/provinces_report_list.dart';
 import 'package:corona_italy/features/infection_report/presentation/widgets/report_grid_tile.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegionalReportScreen extends StatefulWidget {
   final RegionalReportVm model;
@@ -15,6 +20,23 @@ class RegionalReportScreen extends StatefulWidget {
 }
 
 class _RegionalReportScreenState extends State<RegionalReportScreen> {
+  ProvincialReportBloc provincialReportBloc;
+  @override
+  void initState() {
+    provincialReportBloc = ProvincialReportBloc(
+      DependencyProvider.instance.infectionsReportService,
+      regionCode: widget.model.regionCode,
+    );
+    provincialReportBloc.add(ProvincialReportFetch());
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    provincialReportBloc?.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,8 +110,20 @@ class _RegionalReportScreenState extends State<RegionalReportScreen> {
               ],
             ),
             SliverToBoxAdapter(
+              child: BlocProvider<ProvincialReportBloc>.value(
+                value: provincialReportBloc,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: ProvincesReportList(
+                    regionCode: widget.model.regionCode,
+                  ),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -107,12 +141,6 @@ class _RegionalReportScreenState extends State<RegionalReportScreen> {
                     ),
                   ],
                 ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Text(
-                tr('provinces_list') + ' coming soon',
-                style: Theme.of(context).textTheme.headline5,
               ),
             ),
             SliverToBoxAdapter(
