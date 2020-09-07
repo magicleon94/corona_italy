@@ -1,12 +1,12 @@
-import 'package:corona_italy/common/closable_bloc.dart';
 import 'package:corona_italy/features/infection_report/bloc/national/national_report_bloc_event.dart';
 import 'package:corona_italy/features/infection_report/bloc/national/national_report_bloc_state.dart';
 import 'package:corona_italy/features/infection_report/model/national/national_report_request.dart';
 import 'package:corona_italy/features/infection_report/model/national/national_report_vm.dart';
 import 'package:corona_italy/features/infection_report/service/infections_report_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NationalReportBloc
-    extends ClosableBloc<NationalReportBlocEvent, NationalReportState> {
+    extends Bloc<NationalReportBlocEvent, NationalReportState> {
   InfectionsReportService service;
   NationalReportBloc(this.service, {NationalReportState initialState})
       : super(initialState ?? NationalReportIdle());
