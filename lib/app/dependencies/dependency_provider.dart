@@ -1,62 +1,38 @@
-import 'package:corona_italy/app/config/app_config.dart';
-import 'package:corona_italy/common/closable_bloc.dart';
+import 'package:corona_italy/app/dependencies/dependency_factory.dart';
 import 'package:corona_italy/features/infection_report/bloc/national/national_report_bloc.dart';
-import 'package:corona_italy/features/infection_report/bloc/national/national_report_bloc_state.dart';
+import 'package:corona_italy/features/infection_report/bloc/provincial/provincial_report_bloc.dart';
 import 'package:corona_italy/features/infection_report/bloc/regional/regional_report_bloc.dart';
-import 'package:corona_italy/features/infection_report/bloc/regional/regional_report_bloc_state.dart';
 import 'package:corona_italy/features/infection_report/service/infections_report_service.dart';
 import 'package:dio/dio.dart';
-import 'package:http_services/http_services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DependencyProvider {
-  static DependencyProvider _instance;
+class DependencyProvider extends StatelessWidget {
+  final Widget child;
+  final DependencyFactory dependencyFactory;
 
-  DependencyProvider._internal();
-
-  static DependencyProvider get instance {
-    _instance ??= DependencyProvider._internal();
-    return _instance;
-  }
-
-  Dio _dio;
-
-  Dio get dio {
-    _dio ??= Dio(
-      BaseOptions(baseUrl: AppConfig.BASE_URL, contentType: 'application/json'),
+  const DependencyProvider({
+    Key key,
+    this.child,
+    this.dependencyFactory,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<Dio>(create: dependencyFactory.createDio),
+        RepositoryProvider<InfectionsReportService>(
+            create: dependencyFactory.createInfectionsReportService),
+        RepositoryProvider<BlocCreator<NationalReportBloc>>(
+            create: (_) => dependencyFactory.nationalReportBlocCreator),
+        RepositoryProvider<BlocCreator<RegionalReportBloc>>(
+            create: (_) => dependencyFactory.regionalReportBlocCreator),
+        RepositoryProvider<BlocCreator<ProvincialReportBloc>>(
+            create: (_) => dependencyFactory.provincialReportBlocCreator),
+      ],
+      child: Builder(
+        builder: (context) => child,
+      ),
     );
-    return _dio;
   }
-
-  InfectionsReportService _infectionsReportService;
-
-  InfectionsReportService get infectionsReportService {
-    if (_serviceNeedsBuild(_infectionsReportService)) {
-      _infectionsReportService ??= InfectionsReportService(dio);
-    }
-    return _infectionsReportService;
-  }
-
-  NationalReportBloc _nationalReportBloc;
-
-  NationalReportBloc getNationalReportBloc({NationalReportState initialState}) {
-    if (_blocNeedsBuild(_nationalReportBloc)) {
-      _nationalReportBloc = NationalReportBloc(infectionsReportService,
-          initialState: initialState);
-    }
-    return _nationalReportBloc;
-  }
-
-  RegionalReportBloc _regionalReportBloc;
-
-  RegionalReportBloc getRegionalReportBloc({RegionalReportState initialState}) {
-    if (_blocNeedsBuild(_regionalReportBloc)) {
-      _regionalReportBloc = RegionalReportBloc(infectionsReportService,
-          initialState: initialState);
-    }
-    return _regionalReportBloc;
-  }
-
-  bool _blocNeedsBuild(ClosableBloc bloc) => bloc == null || bloc.closed;
-  bool _serviceNeedsBuild(HttpServiceBase service) =>
-      service == null || service.disposed;
 }

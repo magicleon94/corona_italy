@@ -18,10 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      BlocProvider.of<NationalReportBloc>(context).add(NationalReportFetch());
-      BlocProvider.of<RegionalReportBloc>(context).add(RegionalReportFetch());
-    });
+    BlocProvider.of<NationalReportBloc>(context).add(NationalReportFetch());
+    BlocProvider.of<RegionalReportBloc>(context).add(RegionalReportFetch());
   }
 
   @override

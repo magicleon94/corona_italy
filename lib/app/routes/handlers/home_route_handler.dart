@@ -1,4 +1,4 @@
-import 'package:corona_italy/app/dependencies/dependency_provider.dart';
+import 'package:corona_italy/app/dependencies/dependency_factory.dart';
 import 'package:corona_italy/features/infection_report/bloc/national/national_report_bloc.dart';
 import 'package:corona_italy/features/infection_report/bloc/regional/regional_report_bloc.dart';
 import 'package:corona_italy/features/infection_report/presentation/screens/home_screen.dart';
@@ -15,12 +15,14 @@ class HomeRouteHandler extends RouteHandler {
         builder: (_) => MultiBlocProvider(
           providers: [
             BlocProvider<NationalReportBloc>(
-              create: (_) =>
-                  DependencyProvider.instance.getNationalReportBloc(),
+              create: (_) => context
+                  .repository<BlocCreator<NationalReportBloc>>()
+                  ?.call(context),
             ),
             BlocProvider<RegionalReportBloc>(
-              create: (_) =>
-                  DependencyProvider.instance.getRegionalReportBloc(),
+              create: (_) => context
+                  .repository<BlocCreator<RegionalReportBloc>>()
+                  ?.call(context),
             )
           ],
           child: HomeScreen(),
