@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DependencyProvider extends StatelessWidget {
   final Widget child;
-  final DependencyFactory dependencyFactory;
+  final DependencyFactoryBase dependencyFactory;
 
   const DependencyProvider({
     Key key,
