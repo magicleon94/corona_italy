@@ -22,13 +22,17 @@ class DependencyProvider extends StatelessWidget {
       providers: [
         RepositoryProvider<Dio>(create: dependencyFactory.createDio),
         RepositoryProvider<InfectionsReportService>(
-            create: dependencyFactory.createInfectionsReportService),
+          create: dependencyFactory.createInfectionsReportService,
+        ),
         RepositoryProvider<BlocCreator<NationalReportBloc>>(
-            create: (_) => dependencyFactory.nationalReportBlocCreator),
+          create: (_) => dependencyFactory.nationalReportBlocCreator,
+        ),
         RepositoryProvider<BlocCreator<RegionalReportBloc>>(
-            create: (_) => dependencyFactory.regionalReportBlocCreator),
+          create: (_) => dependencyFactory.regionalReportBlocCreator,
+        ),
         RepositoryProvider<BlocCreator<ProvincialReportBloc>>(
-            create: (_) => dependencyFactory.provincialReportBlocCreator),
+          create: (_) => dependencyFactory.provincialReportBlocCreator,
+        ),
       ],
       child: Builder(
         builder: (context) => child,
