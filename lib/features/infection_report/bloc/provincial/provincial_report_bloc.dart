@@ -1,12 +1,12 @@
-import 'package:corona_italy/common/closable_bloc.dart';
 import 'package:corona_italy/features/infection_report/bloc/provincial/provincial_report_bloc_event.dart';
 import 'package:corona_italy/features/infection_report/bloc/provincial/provincial_report_bloc_state.dart';
 import 'package:corona_italy/features/infection_report/model/provincial/provincial_report_request.dart';
 import 'package:corona_italy/features/infection_report/model/provincial/provincial_report_vm.dart';
 import 'package:corona_italy/features/infection_report/service/infections_report_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProvincialReportBloc
-    extends ClosableBloc<ProvincialReportBlocEvent, ProvincialReportBlocState> {
+    extends Bloc<ProvincialReportBlocEvent, ProvincialReportBlocState> {
   final InfectionsReportService service;
   final int regionCode;
   ProvincialReportBloc(this.service,
