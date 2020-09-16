@@ -16,7 +16,7 @@ dependencies:
   easy_localization: ^2.3.3
   flutter_map: ^0.10.1+1
   latlong: ^0.6.1
-  flutter_bloc: ^6.0.1
+  flutter_bloc: ^5.0.1
   json_annotation:
   dio: ^3.0.10
   sliding_up_panel: ^1.0.2

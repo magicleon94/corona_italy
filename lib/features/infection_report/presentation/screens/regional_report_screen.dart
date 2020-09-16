@@ -1,4 +1,4 @@
-import 'package:corona_italy/app/dependencies/dependency_provider.dart';
+import 'package:corona_italy/app/dependencies/dependency_factory.dart';
 import 'package:corona_italy/features/infection_report/bloc/provincial/provincial_report_bloc.dart';
 import 'package:corona_italy/features/infection_report/bloc/provincial/provincial_report_bloc_event.dart';
 import 'package:corona_italy/features/infection_report/model/regional/regional_report_vm.dart';
@@ -23,10 +23,8 @@ class _RegionalReportScreenState extends State<RegionalReportScreen> {
   ProvincialReportBloc provincialReportBloc;
   @override
   void initState() {
-    provincialReportBloc = ProvincialReportBloc(
-      DependencyProvider.instance.infectionsReportService,
-      regionCode: widget.model.regionCode,
-    );
+    provincialReportBloc =
+        context.repository<BlocCreator<ProvincialReportBloc>>()(context);
     provincialReportBloc.add(ProvincialReportFetch());
     super.initState();
   }
