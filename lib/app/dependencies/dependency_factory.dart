@@ -20,26 +20,26 @@ abstract class DependencyFactoryBase {
 class DependencyFactory extends DependencyFactoryBase {
   @override
   Dio createDio(BuildContext _) => Dio(
-        BaseOptions(
-            baseUrl: AppConfig.BASE_URL, contentType: 'application/json'),
-      );
+    BaseOptions(
+        baseUrl: AppConfig.BASE_URL, contentType: 'application/json'),
+  );
 
   @override
   InfectionsReportService createInfectionsReportService(BuildContext context) =>
-      InfectionsReportService(context.repository<Dio>());
+      InfectionsReportService(context.read<Dio>());
 
   @override
   BlocCreator<NationalReportBloc> get nationalReportBlocCreator =>
-      (BuildContext context) =>
-          NationalReportBloc(context.repository<InfectionsReportService>());
+          (BuildContext context) =>
+          NationalReportBloc(context.read<InfectionsReportService>());
 
   @override
   BlocCreator<RegionalReportBloc> get regionalReportBlocCreator =>
-      (BuildContext context) =>
-          RegionalReportBloc(context.repository<InfectionsReportService>());
+          (BuildContext context) =>
+          RegionalReportBloc(context.read<InfectionsReportService>());
 
   @override
   BlocCreator<ProvincialReportBloc> get provincialReportBlocCreator =>
-      (BuildContext context) =>
-          ProvincialReportBloc(context.repository<InfectionsReportService>());
+          (BuildContext context) =>
+          ProvincialReportBloc(context.read<InfectionsReportService>());
 }

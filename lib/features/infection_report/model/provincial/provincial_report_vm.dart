@@ -1,6 +1,6 @@
 import 'package:corona_italy/common/helpers/location_helper.dart';
 import 'package:corona_italy/features/infection_report/model/provincial/provincial_report_response.dart';
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 
 extension ListExtension<T> on List<T> {
   T removeFirstWhere(bool Function(T) predicate) {
@@ -67,7 +67,7 @@ class ProvincialReportVm {
   });
 
   factory ProvincialReportVm.fromDto(
-          ProvincialReport dto, ProvincialReport yesterday) =>
+      ProvincialReport dto, ProvincialReport yesterday) =>
       ProvincialReportVm(
         date: dto.date,
         country: dto.country,

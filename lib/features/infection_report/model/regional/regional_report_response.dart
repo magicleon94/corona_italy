@@ -47,10 +47,10 @@ class RegionalReport {
   final int dischargedHealed;
   @JsonKey(name: 'deceduti')
   final int deceased;
-  @JsonKey(name: 'casi_da_sospetto_diagnostico')
-  final int diagnosticSuspicionCases;
-  @JsonKey(name: 'casi_da_screening')
-  final int screeningCases;
+  @JsonKey(name: 'casi_da_sospetto_diagnostico', defaultValue: 'n.a.')
+  final String diagnosticSuspicionCases;
+  @JsonKey(name: 'casi_da_screening', defaultValue: 'n.a.')
+  final String screeningCases;
   @JsonKey(name: 'totale_casi')
   final int totalCases;
   @JsonKey(name: 'tamponi')

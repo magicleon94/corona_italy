@@ -10,18 +10,18 @@ dependencies:
   flutter:
     sdk: flutter
 
-  pedantic: ^1.8.0
-  route_handler: ^1.0.0
-  http_services: ^1.0.0
-  easy_localization: ^2.3.3
-  flutter_map: ^0.10.1+1
+  pedantic: ^1.11.1
+  route_handler: ^2.0.0
+  http_services: ^2.1.1
+  easy_localization: ^3.0.0
+  flutter_map: ^0.14.0
   latlong: ^0.6.1
-  flutter_bloc: ^5.0.1
-  json_annotation:
-  dio: ^3.0.10
-  sliding_up_panel: ^1.0.2
-  intl: ^0.16.1
-  
+  flutter_bloc: ^8.0.0
+  json_annotation: ^3.1.1
+  dio: ^4.0.4
+  sliding_up_panel: ^2.0.0+1
+  intl: ^0.17.0
+
 dev_dependencies:
   build_runner:
   json_serializable:

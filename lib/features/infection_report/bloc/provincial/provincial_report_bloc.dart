@@ -11,30 +11,22 @@ class ProvincialReportBloc
   final int regionCode;
   ProvincialReportBloc(this.service,
       {ProvincialReportBlocState initialState, this.regionCode})
-      : super(initialState ?? ProvincialReportIdle());
+      : super(initialState ?? ProvincialReportIdle()){
 
-  @override
-  Stream<ProvincialReportBlocState> mapEventToState(
-      ProvincialReportBlocEvent event) async* {
-    switch (event.runtimeType) {
-      case ProvincialReportFetch:
-        try {
-          yield ProvincialReportLoading();
-          final model = await _fetchProvincialReport();
-          yield ProvincialReportLoaded(model);
-        } catch (e) {
-          yield ProvincialReportLoadingError(e.toString());
-        }
-        break;
-      default:
-        throw UnsupportedError('Event not supported');
-        break;
-    }
+    on<ProvincialReportFetch>((event, emit) async {
+      try {
+        emit(ProvincialReportLoading());
+        final model = await _fetchProvincialReport();
+        emit(ProvincialReportLoaded(model));
+      } catch (e) {
+        emit(ProvincialReportLoadingError(e.toString()));
+      }
+    });
   }
 
   Future<ProvincialReportsVm> _fetchProvincialReport() async {
     final response =
-        await service.getProvincialReport(ProvincialReportRequest());
+    await service.getProvincialReport(ProvincialReportRequest());
 
     final yesterdayResponse = await service.getProvincialReport(
       ProvincialReportRequest(

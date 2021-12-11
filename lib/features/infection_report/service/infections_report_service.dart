@@ -16,8 +16,8 @@ class InfectionsReportService extends HttpServiceBase {
       NationalReportRequest request) {
     return getQuery(
         request: request,
-        mapper: (json) => NationalReportResponse.fromJson(json),
-        orElse: (data) {
+        mapper: (json, response) => NationalReportResponse.fromJson(json),
+        orElse: (data, response) {
           final decoded = jsonDecode(data);
           final json = decoded.first;
           return NationalReportResponse.fromJson(json);
@@ -28,8 +28,8 @@ class InfectionsReportService extends HttpServiceBase {
       RegionalReportRequest request) {
     return getQuery(
         request: request,
-        mapper: (json) => RegionalReportResponse.fromJson(json),
-        orElse: (data) {
+        mapper: (json, response) => RegionalReportResponse.fromJson(json),
+        orElse: (data, response) {
           final decoded = jsonDecode(data);
           return RegionalReportResponse.fromJson({'data': decoded});
         });
@@ -39,8 +39,8 @@ class InfectionsReportService extends HttpServiceBase {
       ProvincialReportRequest request) {
     return getQuery(
       request: request,
-      mapper: (json) => ProvincialReportResponse.fromJson(json),
-      orElse: (data) {
+      mapper: (json, response) => ProvincialReportResponse.fromJson(json),
+      orElse: (data, response) {
         try {
           final decoded = jsonDecode(data);
           return ProvincialReportResponse.fromJson({'data': decoded});

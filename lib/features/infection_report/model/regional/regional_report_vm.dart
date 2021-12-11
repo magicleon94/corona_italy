@@ -1,6 +1,6 @@
 import 'package:corona_italy/common/helpers/location_helper.dart';
 import 'package:corona_italy/features/infection_report/model/regional/regional_report_response.dart';
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 
 class RegionalReportVm {
   final DateTime date;
@@ -17,8 +17,8 @@ class RegionalReportVm {
   final int newPositive;
   final int dischargedHealed;
   final int deceased;
-  final int diagnosticSuspicionCases;
-  final int screeningCases;
+  final String diagnosticSuspicionCases;
+  final String screeningCases;
   final int totalCases;
   final int tampons;
   final int testedCases;
@@ -48,27 +48,27 @@ class RegionalReportVm {
   });
 
   factory RegionalReportVm.fromDto(RegionalReport dto) => RegionalReportVm(
-        date: dto.date,
-        country: dto.country,
-        regionCode: dto.regionCode,
-        regionName: dto.regionName,
-        location: LocationHelper.getLatLng(dto.latitude, dto.longitude),
-        hospitalizedWithSymptoms: dto.hospitalizedWithSymptoms,
-        intensiveCare: dto.intensiveCare,
-        totalHospitalized: dto.totalHospitalized,
-        homeIsolation: dto.homeIsolation,
-        totalPositive: dto.totalPositive,
-        totalPositiveVariation: dto.totalPositiveVariation,
-        newPositive: dto.newPositive,
-        dischargedHealed: dto.dischargedHealed,
-        deceased: dto.deceased,
-        diagnosticSuspicionCases: dto.diagnosticSuspicionCases,
-        screeningCases: dto.screeningCases,
-        totalCases: dto.totalCases,
-        tampons: dto.tampons,
-        testedCases: dto.testedCases,
-        notes: dto.notes,
-      );
+    date: dto.date,
+    country: dto.country,
+    regionCode: dto.regionCode,
+    regionName: dto.regionName,
+    location: LocationHelper.getLatLng(dto.latitude, dto.longitude),
+    hospitalizedWithSymptoms: dto.hospitalizedWithSymptoms,
+    intensiveCare: dto.intensiveCare,
+    totalHospitalized: dto.totalHospitalized,
+    homeIsolation: dto.homeIsolation,
+    totalPositive: dto.totalPositive,
+    totalPositiveVariation: dto.totalPositiveVariation,
+    newPositive: dto.newPositive,
+    dischargedHealed: dto.dischargedHealed,
+    deceased: dto.deceased,
+    diagnosticSuspicionCases: dto.diagnosticSuspicionCases,
+    screeningCases: dto.screeningCases,
+    totalCases: dto.totalCases,
+    tampons: dto.tampons,
+    testedCases: dto.testedCases,
+    notes: dto.notes,
+  );
 }
 
 class RegionalReportsVm {
