@@ -9,25 +9,17 @@ class NationalReportBloc
     extends Bloc<NationalReportBlocEvent, NationalReportState> {
   InfectionsReportService service;
   NationalReportBloc(this.service, {NationalReportState initialState})
-      : super(initialState ?? NationalReportIdle());
+      : super(initialState ?? NationalReportIdle()) {
 
-  @override
-  Stream<NationalReportState> mapEventToState(
-      NationalReportBlocEvent event) async* {
-    switch (event.runtimeType) {
-      case NationalReportFetch:
-        try {
-          yield NationalReportLoading();
-          final model = await _fetchNationalReport();
-          yield NationalReportLoaded(model);
-        } catch (e) {
-          yield NationalReportLoadingError(e.toString());
-        }
-        break;
-      default:
-        throw UnsupportedError('Event not supported');
-        break;
-    }
+    on<NationalReportFetch>((event, emit) async {
+      try {
+        emit(NationalReportLoading());
+        final model = await _fetchNationalReport();
+        emit(NationalReportLoaded(model));
+      } catch (e) {
+        emit(NationalReportLoadingError(e.toString()));
+      }
+    });
   }
 
   Future<NationalReportVm> _fetchNationalReport() async {

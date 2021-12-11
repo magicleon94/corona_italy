@@ -6,7 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 
 class InfectionsMap extends StatefulWidget {
   @override
@@ -39,7 +39,7 @@ class _InfectionsMapState extends State<InfectionsMap> {
         if (state is RegionalReportLoaded) {
           markers.addAll(
             state.report.reports.map(
-              (region) => Marker(
+                  (region) => Marker(
                 point: region.location,
                 width: 200,
                 builder: (context) => Container(
@@ -74,7 +74,7 @@ class _InfectionsMapState extends State<InfectionsMap> {
             slideOnBoundaries: true,
             swPanBoundary: bounds.southWest,
             nePanBoundary: bounds.northEast,
-            interactive: true,
+            interactiveFlags: InteractiveFlag.all,
           ),
           layers: [
             TileLayerOptions(

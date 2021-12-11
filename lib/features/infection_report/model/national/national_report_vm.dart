@@ -12,8 +12,8 @@ class NationalReportVm {
   final int newPositive;
   final int dischargedHealed;
   final int deceased;
-  final int diagnosticSuspicionCases;
-  final int screeningCases;
+  final String diagnosticSuspicionCases;
+  final String screeningCases;
   final int totalCases;
   final int tampons;
   final int testedCases;

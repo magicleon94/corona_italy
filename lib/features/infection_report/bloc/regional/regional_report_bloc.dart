@@ -9,25 +9,17 @@ class RegionalReportBloc
     extends Bloc<RegionalReportBlocEvent, RegionalReportState> {
   final InfectionsReportService service;
   RegionalReportBloc(this.service, {RegionalReportState initialState})
-      : super(initialState ?? RegionalReportIdle());
+      : super(initialState ?? RegionalReportIdle()){
 
-  @override
-  Stream<RegionalReportState> mapEventToState(
-      RegionalReportBlocEvent event) async* {
-    switch (event.runtimeType) {
-      case RegionalReportFetch:
-        try {
-          yield RegionalReportLoading();
-          final model = await _fetchRegionalReport();
-          yield RegionalReportLoaded(model);
-        } catch (e) {
-          yield RegionalReportLoadingError(e.toString());
-        }
-        break;
-      default:
-        throw UnsupportedError('Event not supported');
-        break;
-    }
+    on<RegionalReportFetch>((event, emit) async {
+      try {
+        emit(RegionalReportLoading());
+        final model = await _fetchRegionalReport();
+        emit(RegionalReportLoaded(model));
+      } catch (e) {
+        emit(RegionalReportLoadingError(e.toString()));
+      }
+    });
   }
 
   Future<RegionalReportsVm> _fetchRegionalReport() async {

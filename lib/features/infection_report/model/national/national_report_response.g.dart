@@ -20,11 +20,12 @@ NationalReportResponse _$NationalReportResponseFromJson(
     newPositive: json['nuovi_positivi'] as int,
     dischargedHealed: json['dimessi_guariti'] as int,
     deceased: json['deceduti'] as int,
-    diagnosticSuspicionCases: json['casi_da_sospetto_diagnostico'] as int,
-    screeningCases: json['casi_da_screening'] as int,
+    diagnosticSuspicionCases:
+        json['casi_da_sospetto_diagnostico'] as String ?? 'n.a.',
+    screeningCases: json['casi_da_screening'] as String ?? 'n.a.',
     totalCases: json['totale_casi'] as int,
     tampons: json['tamponi'] as int,
     testedCases: json['casi_testati'] as int,
-    notes: json['note'] as String,
+    notes: json['note'] as String ?? '',
   );
 }

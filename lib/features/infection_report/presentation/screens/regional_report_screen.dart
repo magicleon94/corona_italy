@@ -24,7 +24,7 @@ class _RegionalReportScreenState extends State<RegionalReportScreen> {
   @override
   void initState() {
     provincialReportBloc =
-        context.repository<BlocCreator<ProvincialReportBloc>>()(context);
+        context.read<BlocCreator<ProvincialReportBloc>>()(context);
     provincialReportBloc.add(ProvincialReportFetch());
     super.initState();
   }
@@ -121,7 +121,7 @@ class _RegionalReportScreenState extends State<RegionalReportScreen> {
             SliverToBoxAdapter(
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
